@@ -88,6 +88,19 @@ async function setup() {
     input_filt.focus();
     // set up initial deck code if any
     set_up_initial_deck_code();
+
+    // set up initial filter if any
+    set_up_initial_filter();
+}
+
+function set_up_initial_filter() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const filter_str = urlParams.get("filter");
+    console.log("filter_str", filter_str);
+    if (filter_str) {
+        document.getElementById("input_filter").value = filter_str;
+        button_filter_clicked();
+    }
 }
 
 function main() {

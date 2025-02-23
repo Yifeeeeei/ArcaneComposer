@@ -900,7 +900,10 @@ function toggle_deck_info_onclick() {
 
 function onclick_refresh() {
     url =
-        "https://yifeeeeei.github.io/ArcaneComposer/?code=" +
-        get_current_deck_code();
+        window.location.origin +
+        "?code=" +
+        get_current_deck_code() +
+        "&filter=" +
+        document.getElementById("input_filter").value;
     window.location.assign(url);
 }
