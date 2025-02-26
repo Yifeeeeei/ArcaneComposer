@@ -901,7 +901,7 @@ function toggle_deck_info_onclick() {
 function onclick_refresh() {
     url =
         window.location.origin +
-        "?code=" +
+        "/ArcaneComposer/?code=" +
         get_current_deck_code() +
         "&filter=" +
         document.getElementById("input_filter").value;
