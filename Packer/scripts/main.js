@@ -61,7 +61,7 @@ function openpack() {
 function getWeightByCardNumber(cardNumber) {
     // hero card 1, legendary card 1, normal card 100, spawns 0
     if (cardNumber[0] == "4") {
-        return 100;
+        return 10;
     }
     if (cardNumber[2] == "1") {
         return 10;
