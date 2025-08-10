@@ -34,7 +34,7 @@ class CardObject {
                 this.cardElement.classList.remove("backup"); // 显示正面
                 this.cardElement.classList.add("frontup");
                 if (this.isLegend()) {
-                    this.playParticleEffect(100, 400, "#f4b180ff");
+                    this.playParticleEffect(1000, 400, "#f4b180ff");
                 } else {
                     this.playParticleEffect(500, 200, "#f2f7d0ff");
                 }
@@ -46,10 +46,10 @@ class CardObject {
     }
 
     isLegend() {
-        if (cardNumber[0] == "4") {
+        if (this.cardElement.id[0] == "4") {
             return true;
         }
-        if (cardNumber[2] == "1") {
+        if (this.cardElement.id[2] == "1") {
             return true;
         }
         return false;
