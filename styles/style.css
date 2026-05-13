@@ -99,6 +99,10 @@ input {
     gap: 8px;
 }
 
+.mobile-tabs {
+    display: none;
+}
+
 a,
 .app-nav a {
     display: inline-flex;
@@ -636,8 +640,116 @@ canvas {
 }
 
 @media (max-width: 720px) {
+    body.page-composer {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .app-header {
+        gap: 10px;
+        padding: 12px 12px 8px;
+    }
+
+    .brand-lockup strong {
+        font-size: 1.45rem;
+    }
+
+    .app-nav {
+        width: 100%;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: 2px;
+    }
+
+    .app-nav a {
+        flex: 0 0 auto;
+        min-height: 34px;
+        padding: 0 10px;
+    }
+
+    .mobile-tabs {
+        position: fixed;
+        right: 10px;
+        bottom: 10px;
+        left: 10px;
+        z-index: 12;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        border: 1px solid var(--line);
+        padding: 8px;
+        background: rgba(8, 7, 5, 0.94);
+        box-shadow: 0 -18px 42px rgba(0, 0, 0, 0.42);
+        backdrop-filter: blur(14px);
+    }
+
+    .mobile-tabs button {
+        min-height: 42px;
+        padding: 0 8px;
+        color: var(--muted);
+        background: rgba(246, 239, 228, 0.05);
+    }
+
+    .mobile-tabs button.active {
+        color: var(--ink);
+        border-color: rgba(215, 181, 109, 0.75);
+        background: rgba(215, 181, 109, 0.14);
+    }
+
     .container {
-        padding: 0 10px 10px;
+        height: calc(100dvh - 124px);
+        min-height: 0;
+        padding: 0 10px 76px;
+        overflow: hidden;
+    }
+
+    .page-composer .left-side,
+    .page-composer .right-side {
+        min-height: 0;
+        height: 100%;
+    }
+
+    .page-composer[data-mobile-view="cards"] .right-side,
+    .page-composer[data-mobile-view="deck"] .left-side,
+    .page-composer[data-mobile-view="code"] .left-side {
+        display: none;
+    }
+
+    .page-composer[data-mobile-view="cards"] .left-side,
+    .page-composer[data-mobile-view="deck"] .right-side,
+    .page-composer[data-mobile-view="code"] .right-side {
+        display: grid;
+    }
+
+    .page-composer[data-mobile-view="deck"] .right-side {
+        grid-template-rows: minmax(0, 1fr);
+    }
+
+    .page-composer[data-mobile-view="deck"] .right-side > .upper-part {
+        display: none;
+    }
+
+    .page-composer[data-mobile-view="code"] .right-side {
+        grid-template-rows: auto;
+        align-content: start;
+    }
+
+    .page-composer[data-mobile-view="code"] .right-side > .lower-part {
+        display: none;
+    }
+
+    .page-composer[data-mobile-view="code"] .right-side > .upper-part {
+        border-bottom: 0;
+    }
+
+    .page-composer .left-side .upper-part {
+        gap: 10px;
+        padding: 12px;
+    }
+
+    .page-composer .panel-title {
+        min-width: 0;
     }
 
     .filter-bar,
@@ -652,27 +764,70 @@ canvas {
     }
 
     #collections_list {
-        grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(min(92vw, 190px), 1fr));
+        gap: 10px;
+    }
+
+    .card {
+        width: min(var(--card-width, 200px), 92vw) !important;
+        padding: 7px;
+    }
+
+    .card_name {
+        font-size: 0.82rem;
+    }
+
+    .card_information_bar {
+        font-size: 0.7rem;
+    }
+
+    .deck_header {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        margin-top: 10px;
+        background: rgba(31, 24, 17, 0.96);
+    }
+
+    #deck_info {
+        right: 10px;
+        bottom: 76px;
+        left: 10px;
+        height: 42vh;
     }
 
     #zoom_img,
     #zoom_text {
         left: 50%;
         right: auto;
-        width: min(88vw, 520px);
-        max-width: 88vw;
+        width: min(90vw, 420px);
+        max-width: 90vw;
         height: auto;
         transform: translateX(-50%);
     }
 
     #zoom_img {
-        top: 3vh;
-        max-height: 52vh;
+        top: 4dvh;
+        max-height: 48dvh;
     }
 
     #zoom_text {
-        top: 58vh;
-        max-height: 36vh;
+        top: 55dvh;
+        width: 90vw;
+        max-height: 38dvh;
+        padding: 16px;
+        font-size: 0.96rem;
+    }
+
+    #popup_hint {
+        width: 90vw;
+        max-height: 82dvh;
+        padding: 18px;
+    }
+
+    #toast {
+        top: 10px;
+        min-width: calc(100vw - 24px);
     }
 }
 

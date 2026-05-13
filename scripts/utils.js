@@ -68,7 +68,10 @@ function sync_card_grid_layout() {
     if (!collectionsList) {
         return;
     }
-    collectionsList.style.gridTemplateColumns = `repeat(auto-fill, minmax(${card_width}, 1fr))`;
+    document.documentElement.style.setProperty("--card-width", card_width);
+    const isMobile = window.matchMedia("(max-width: 720px)").matches;
+    const minTrack = isMobile ? `min(${card_width}, 92vw)` : card_width;
+    collectionsList.style.gridTemplateColumns = `repeat(auto-fill, minmax(${minTrack}, 1fr))`;
 }
 
 function mouseover_card_name_element(event) {

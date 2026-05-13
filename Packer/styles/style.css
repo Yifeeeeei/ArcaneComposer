@@ -302,11 +302,13 @@ body::before {
 
 @media (max-width: 720px) {
     body {
-        overflow: auto;
+        min-height: 100dvh;
+        overflow: hidden;
     }
 
     .packer-shell {
-        padding: 22px 12px 92px;
+        min-height: 100dvh;
+        padding: 14px 10px 78px;
     }
 
     body::before {
@@ -314,12 +316,27 @@ body::before {
     }
 
     .container {
-        grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-content: center;
+        gap: 10px;
+        width: min(100%, 390px);
+        max-height: calc(100dvh - 104px);
+        padding: 4px;
+        overflow: visible;
+    }
+
+    .card {
+        width: min(41vw, 145px) !important;
+        height: calc(min(41vw, 145px) * 1.46) !important;
+        border-radius: 7px;
     }
 
     #openpack {
-        right: 18px;
-        bottom: 18px;
+        right: 10px;
+        bottom: 12px;
+        left: 10px;
+        width: auto;
+        min-height: 48px;
     }
 }
 

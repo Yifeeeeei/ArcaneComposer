@@ -91,6 +91,7 @@ async function setup() {
 
     // set up initial filter if any
     set_up_initial_filter();
+    setup_mobile_tabs();
 }
 
 function set_up_initial_filter() {
@@ -106,6 +107,28 @@ function set_up_initial_filter() {
 function main() {
     console.log("Hello from main.js");
     setup();
+}
+
+function setup_mobile_tabs() {
+    const tabs = document.querySelectorAll(".mobile-tabs [data-mobile-view]");
+    if (tabs.length === 0) {
+        return;
+    }
+    document.body.dataset.mobileView = "cards";
+    tabs.forEach(function (tab) {
+        tab.addEventListener("click", function () {
+            const view = tab.dataset.mobileView;
+            document.body.dataset.mobileView = view;
+            tabs.forEach(function (item) {
+                item.classList.toggle("active", item === tab);
+                item.setAttribute("aria-pressed", item === tab ? "true" : "false");
+            });
+        });
+        tab.setAttribute(
+            "aria-pressed",
+            tab.classList.contains("active") ? "true" : "false"
+        );
+    });
 }
 
 main();

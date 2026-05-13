@@ -82,3 +82,89 @@
         grid-template-columns: 1fr;
     }
 }
+
+@media (max-width: 720px) {
+    body.page-arena {
+        height: auto;
+        min-height: 100%;
+        overflow: auto;
+    }
+
+    .page-arena .app-header {
+        gap: 10px;
+        padding: 12px 12px 8px;
+    }
+
+    .page-arena .brand-lockup strong {
+        font-size: 1.45rem;
+    }
+
+    .page-arena .app-nav {
+        width: 100%;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 2px;
+    }
+
+    .page-arena .app-nav a {
+        flex: 0 0 auto;
+        min-height: 34px;
+        padding: 0 10px;
+    }
+
+    .page-arena .container {
+        grid-template-columns: 1fr;
+        height: auto;
+        min-height: calc(100dvh - 104px);
+        padding: 0 10px 18px;
+        overflow: visible;
+    }
+
+    .page-arena .left-side,
+    .page-arena .right-side {
+        min-height: 0;
+    }
+
+    .page-arena .left-side {
+        gap: 10px;
+    }
+
+    .page-arena .left-side .upper-part {
+        gap: 10px;
+        padding: 12px;
+    }
+
+    .page-arena .right-side {
+        grid-template-rows: minmax(240px, auto);
+    }
+
+    .page-arena .right-side > .upper-part {
+        display: none;
+    }
+
+    .page-arena #collections {
+        min-height: 0;
+        padding: 18px 0;
+    }
+
+    .page-arena #collections_list {
+        grid-template-columns: repeat(auto-fit, minmax(min(250px, 84vw), 1fr));
+        gap: 16px;
+        align-items: start;
+    }
+
+    .page-arena .card {
+        width: min(84vw, 250px) !important;
+        margin: 0 auto;
+    }
+
+    .page-arena .arena-progress {
+        width: 100%;
+    }
+
+    .page-arena .arena-progress span {
+        flex: 1 1 110px;
+        justify-content: center;
+    }
+}
