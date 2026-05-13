@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,7 +20,7 @@
         <script src="./scripts/arena_utils.js"></script>
         <script src="./scripts/arena_main.js"></script>
     </head>
-    <body>
+    <body class="page-arena">
         <div id="shader" hidden onclick="onclick_shader()"></div>
         <div id="zoom_info" hidden>
             <img src="" alt="" id="zoom_img" class="zoom" hidden />
@@ -28,18 +28,6 @@
         </div>
         <!-- <div id="popup" hidden> -->
         <div id="popup_hint" hidden>
-            <p id="subscribe_link">
-                <strong
-                    >订阅奥术纪元TTS模组<a
-                        href="https://steamcommunity.com/sharedfiles/filedetails/?id=3093581820"
-                        >组卡界面</a
-                    >
-                    和<a
-                        href="https://steamcommunity.com/sharedfiles/filedetails/?id=3155709993"
-                        >游戏界面</a
-                    ></strong
-                >
-            </p>
             <ul>
                 <strong>竞技场规则</strong>
                 <li>
@@ -89,59 +77,37 @@
         <!-- </div> -->
         <img id="popup_img" hidden />
 
-        <div class="container">
+        <header class="app-header">
+            <div class="brand-lockup">
+                <span>Era of Arcane</span>
+                <strong>Arena Draft</strong>
+            </div>
+            <nav class="app-nav" aria-label="工具导航">
+                <a href="../" target="_blank" id="go_to_standard">标准构筑</a>
+                <a href="https://yifeeeeei.github.io/EraOfArcane/htmls/Keywords.html" target="_blank" id="keywords">关键词</a>
+                <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3155709993" target="_blank" id="tts_mod">TTS模组</a>
+            </nav>
+        </header>
+
+        <main class="container">
             <div class="left-side">
                 <div class="upper-part">
-                    <!-- Content for the upper left side goes here -->
-                    <!-- <input type="text" id="input_filter" />
-                    <button
-                        id="button_filter"
-                        onclick="button_filter_clicked()"
-                    >
-                        Filt!
-                    </button> -->
-                    <img
-                        src="../resources/zoomin.svg"
-                        id="zoomin"
-                        alt=""
-                        onclick="onclick_zoomin()"
-                        title="Zoom In"
-                    />
-                    <img
-                        src="../resources/zoomout.svg"
-                        id="zoomout"
-                        alt=""
-                        onclick="onclick_zoomout()"
-                        title="Zoom Out"
-                    />
-                    <img
-                        src="../resources/refresh.svg"
-                        id="refresh"
-                        alt=""
-                        onclick="onclick_refresh()"
-                        title="Refresh"
-                    />
-                    <img
-                        id="toggle_deck_info"
-                        src="../resources/chart.svg"
-                        onclick="toggle_deck_info_onclick()"
-                        title="Toggle Deck Info"
-                    />
-                    <img
-                        id="hint"
-                        src="../resources/hint.svg"
-                        onclick="onclick_hint()"
-                        title="Show Hint"
-                    />
-                    <a
-                        href="https://yifeeeeei.github.io/EraOfArcane/htmls/Keywords.html"
-                        target="_blank"
-                        id="keywords"
-                        >关键词</a
-                    >
-                    <a href="../" target="_blank" id="go_to_standard"
-                        >回到标准模式</a
-                    >
+                    <div class="panel-title">
+                        <span>Pick One</span>
+                        <strong>三选一</strong>
+                    </div>
+                    <div class="arena-progress" id="arena_progress">
+                        <span id="arena_stage">选择人物</span>
+                        <span id="arena_pick_count">0 / 41</span>
+                        <span id="arena_element">属性未定</span>
+                    </div>
+                    <div class="icon-tools" aria-label="视图工具">
+                        <img src="../resources/zoomin.svg" id="zoomin" alt="放大" onclick="onclick_zoomin()" title="放大卡牌" />
+                        <img src="../resources/zoomout.svg" id="zoomout" alt="缩小" onclick="onclick_zoomout()" title="缩小卡牌" />
+                        <img src="../resources/refresh.svg" id="refresh" alt="刷新" onclick="onclick_refresh()" title="刷新显示" />
+                        <img id="toggle_deck_info" src="../resources/chart.svg" alt="统计" onclick="toggle_deck_info_onclick()" title="卡组统计" />
+                        <img id="hint" src="../resources/hint.svg" alt="帮助" onclick="onclick_hint()" title="帮助" />
+                    </div>
                 </div>
                 <div class="lower-part" id="collections">
                     <ul id="collections_list"></ul>
@@ -161,17 +127,19 @@
             </div>
             <div class="right-side">
                 <div class="upper-part">
-                    <!-- Content for the upper right side goes here -->
-                    <input type="text" id="input_deck_code" readonly />
-                    <!-- <button id="button_build" onclick="onclick_button_build()">
-                        Build
-                    </button> -->
-                    <button
-                        id="button_export"
-                        onclick="onclick_button_export()"
-                    >
-                        导出
-                    </button>
+                    <div class="panel-title">
+                        <span>Draft Code</span>
+                        <strong>导出</strong>
+                    </div>
+                    <div class="deck-code-bar">
+                        <input
+                            type="text"
+                            id="input_deck_code"
+                            placeholder="完成后自动生成卡组代码"
+                            readonly
+                        />
+                        <button id="button_export" onclick="onclick_button_export()">导出</button>
+                    </div>
                 </div>
                 <div class="lower-part">
                     <!-- Content for the lower right side goes here -->
@@ -193,6 +161,6 @@
                     <div id="deck_extra"></div>
                 </div>
             </div>
-        </div>
+        </main>
     </body>
 </html>

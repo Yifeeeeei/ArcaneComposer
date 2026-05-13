@@ -2,6 +2,9 @@ var arena_candidate_number = 3;
 var arena_chosen_element = "?";
 // arena_card_info_added is used to communicate bewteen main loop and after choosing a card
 var arena_card_info_added = null;
+var arena_total_picks = 41;
+var arena_completed_picks = 0;
+var arena_current_stage = "选择人物";
 
 var element_placeholders = {
     光: "../resources/placeholders/ele_light.png",

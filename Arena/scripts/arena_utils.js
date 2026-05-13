@@ -1,6 +1,7 @@
 async function arena_main_loop() {
     arena_card_info_added = null;
     // choose hero card
+    arena_update_progress("选择人物");
     arena_prepare_candidates(arena_filter_hero);
     await arena_wait_till_card_added();
     arena_chosen_element = arena_card_info_added.category;
@@ -8,6 +9,7 @@ async function arena_main_loop() {
     arena_card_info_added = null;
     for (let j = 0; j < 2; j++) {
         for (let i = 0; i < 15; i++) {
+            arena_update_progress("选择主卡");
             arena_prepare_candidates(
                 arena_create_filter_function_for_main_deck(
                     "main",
@@ -20,6 +22,7 @@ async function arena_main_loop() {
         }
         // choose ability deck
         for (let i = 0; i < 5; i++) {
+            arena_update_progress("选择技能");
             arena_prepare_candidates(
                 arena_create_filter_function_for_ability_deck(
                     "ability",
@@ -32,8 +35,26 @@ async function arena_main_loop() {
         }
     }
     console.log("Arena main loop finished");
+    arena_update_progress("构筑完成");
     // click the export button
     document.getElementById("button_export").click();
+}
+
+function arena_update_progress(stage) {
+    arena_current_stage = stage;
+    const stageElement = document.getElementById("arena_stage");
+    const countElement = document.getElementById("arena_pick_count");
+    const elementElement = document.getElementById("arena_element");
+    if (stageElement) {
+        stageElement.textContent = stage;
+    }
+    if (countElement) {
+        countElement.textContent = `${arena_completed_picks} / ${arena_total_picks}`;
+    }
+    if (elementElement) {
+        elementElement.textContent =
+            arena_chosen_element === "?" ? "属性未定" : `属性 ${arena_chosen_element}`;
+    }
 }
 
 function sleep(ms) {
@@ -142,6 +163,8 @@ function onclick_add_button(event) {
     show_cards();
     // inform a card is chosen
     arena_card_info_added = card_info;
+    arena_completed_picks += 1;
+    arena_update_progress(arena_current_stage);
 
     // block onclick event being passed to parent elements
     event.stopPropagation();

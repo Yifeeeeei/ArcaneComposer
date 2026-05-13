@@ -1,83 +1,84 @@
-.left-side .upper-part {
-    height: 10%;
-    background-color: #d5e6d6;
-    padding: 10px;
+:root {
+    --arena: #9fca92;
+}
+
+.page-arena {
+    background:
+        radial-gradient(circle at 20% 14%, rgba(159, 202, 146, 0.14), transparent 28rem),
+        radial-gradient(circle at 88% 20%, rgba(215, 181, 109, 0.1), transparent 24rem),
+        linear-gradient(135deg, #050604, #10140e 52%, #050505);
+}
+
+.page-arena .brand-lockup strong {
+    color: #f0f7e8;
+}
+
+.arena-progress {
     display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.arena-progress span {
+    display: inline-flex;
     align-items: center;
+    min-height: 32px;
+    border: 1px solid rgba(159, 202, 146, 0.28);
+    padding: 0 10px;
+    color: rgba(240, 247, 232, 0.78);
+    background: rgba(159, 202, 146, 0.08);
+    font-size: 0.86rem;
 }
 
-.upper-part input {
-    margin-right: 6px;
+.page-arena #collections {
+    display: grid;
+    place-items: center;
 }
 
-/* Upper and lower parts of the right side */
-.right-side .upper-part {
-    height: 10%;
-    background-color: #cfe3d2;
-    padding: 10px;
+.page-arena #collections_list {
+    grid-template-columns: repeat(3, minmax(190px, 240px));
+    gap: clamp(26px, 5vw, 72px);
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
-.right-side .lower-part {
-    height: 90%;
-    background-color: #cfecd9;
-    padding: 10px;
-    overflow-y: auto;
+.page-arena .card {
+    position: relative;
+    background:
+        linear-gradient(135deg, rgba(159, 202, 146, 0.09), transparent 58%),
+        var(--card);
 }
 
-.left-side .lower-part {
-    height: 90%;
-    background-color: #c8dfcd;
-    padding: 10px;
-    overflow-y: auto;
+.page-arena .card:hover {
+    box-shadow:
+        0 18px 44px rgba(0, 0, 0, 0.36),
+        0 0 0 1px rgba(159, 202, 146, 0.28);
 }
 
-.card {
-    /* background-color: #dac9a6; */
-    margin: 0.5%;
-    padding: 1%;
-    border-radius: 10px;
-    border-style: solid;
-    border-width: 4px;
-
-    /* width: 200px;
-    height: 330px; */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    /* overflow-y: auto; */
-    background-color: rgb(228, 235, 220);
+.page-arena .card_add_button {
+    width: auto;
+    min-width: 44px;
+    padding: 0 9px;
+    font-size: 0;
 }
 
-#zoomin,
-#zoomout,
-#refresh,
-#toggle_deck_info,
-#hint {
-    height: 30px;
-    text-align: center;
-    margin-bottom: 1%;
-    margin-left: 1%;
-}
-#zoomin:hover,
-#zoomout:hover,
-#refresh:hover,
-#toggle_deck_info:hover,
-#hint:hover {
-    border: #92c3cf 0px solid;
-    border-radius: 4px;
-    background-color: #92c3cf;
-}
-#button_export {
-    background-color: #b9e2d1;
-}
-#button_export:hover {
-    background-color: #91ba82;
+.page-arena .card_add_button::after {
+    content: "选择";
+    font-size: 0.78rem;
 }
 
-#go_to_standard {
-    height: 30px;
-    text-align: center;
-    margin-left: 1%;
+.page-arena #button_export {
+    background: rgba(159, 202, 146, 0.12);
 }
 
-#popup_hint {
-    background-color: #c8dfcd;
+.page-arena #button_export:hover {
+    border-color: rgba(159, 202, 146, 0.82);
+    background: rgba(159, 202, 146, 0.2);
+}
+
+@media (max-width: 900px) {
+    .page-arena #collections_list {
+        grid-template-columns: 1fr;
+    }
 }

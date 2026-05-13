@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,7 +7,14 @@
         <link rel="stylesheet" href="./styles/style.css" />
     </head>
     <body>
-        <div class="container"></div>
+        <main class="packer-shell">
+            <section class="packer-title" aria-label="开包模拟">
+                <span>奥术纪元</span>
+                <strong>开包模拟</strong>
+                <p>点击卡牌翻开，或按空格逐张揭示。</p>
+            </section>
+            <div class="container" aria-live="polite"></div>
+        </main>
 
         <button id="openpack" onclick="openpack()">开包!(空格)</button>
 

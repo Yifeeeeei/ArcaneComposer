@@ -40,6 +40,7 @@ function decode(encoded) {
 // this function will display all cards in displaying_card_infos onto the page
 function show_cards() {
     document.getElementById("collections_list").innerHTML = "";
+    sync_card_grid_layout();
     // sort displaying_card_infos by number
     displaying_card_infos.sort((a, b) => {
         // hero cards goes first, than number
@@ -60,6 +61,14 @@ function show_cards() {
         card_ele.setAttribute("idx", i);
         document.getElementById("collections_list").appendChild(card_ele);
     }
+}
+
+function sync_card_grid_layout() {
+    const collectionsList = document.getElementById("collections_list");
+    if (!collectionsList) {
+        return;
+    }
+    collectionsList.style.gridTemplateColumns = `repeat(auto-fill, minmax(${card_width}, 1fr))`;
 }
 
 function mouseover_card_name_element(event) {
@@ -301,15 +310,51 @@ function get_current_deck_code() {
     return encoded;
 }
 
-function onclick_button_export(event) {
-    encoded = get_current_deck_code();
+async function onclick_button_export(event) {
+    const encoded = get_current_deck_code();
 
     input_deck_code.value = encoded;
+    input_deck_code.focus();
+    input_deck_code.select();
 
-    navigator.clipboard.writeText(encoded).then(function (x) {
-        alert("卡组代码已经复制到剪贴板");
-    });
-    // alert("Deck code copied to clipboard!");
+    let copied = false;
+    if (navigator.clipboard && window.isSecureContext) {
+        try {
+            await navigator.clipboard.writeText(encoded);
+            copied = true;
+        } catch (err) {
+            copied = false;
+        }
+    }
+
+    if (!copied) {
+        try {
+            copied = document.execCommand("copy");
+        } catch (err) {
+            copied = false;
+        }
+    }
+
+    show_toast(
+        copied
+            ? "卡组代码已复制到剪贴板"
+            : "卡组代码已生成，请手动复制输入框内容"
+    );
+}
+
+function show_toast(message) {
+    let toast = document.getElementById("toast");
+    if (!toast) {
+        toast = document.createElement("div");
+        toast.id = "toast";
+        document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    toast.classList.remove("hidden");
+    clearTimeout(show_toast.timer);
+    show_toast.timer = setTimeout(function () {
+        toast.classList.add("hidden");
+    }, 2400);
 }
 
 function onclick_deck_minus_button(event) {
@@ -716,6 +761,7 @@ function onclick_zoomin() {
         all_cards[i].style.width = card_width;
         all_cards[i].style.height = card_height;
     }
+    sync_card_grid_layout();
 }
 
 function onclick_zoomout() {
@@ -728,6 +774,7 @@ function onclick_zoomout() {
         all_cards[i].style.width = card_width;
         all_cards[i].style.height = card_height;
     }
+    sync_card_grid_layout();
 }
 
 function onclick_hint() {
@@ -849,17 +896,31 @@ function draw_bar_plot(canvas, data, labels, chart_reference, title = "") {
                 datasets: [
                     {
                         data: data,
-                        backgroundColor: "#F17C67",
-                        borderColor: "#F17C67",
+                        backgroundColor: "rgba(216, 177, 93, 0.72)",
+                        borderColor: "rgba(246, 239, 228, 0.5)",
                         borderWidth: 1,
                     },
                 ],
             },
             options: {
+                color: "rgba(246, 239, 228, 0.74)",
+                maintainAspectRatio: false,
                 scales: {
+                    x: {
+                        grid: {
+                            color: "rgba(246, 239, 228, 0.08)",
+                        },
+                        ticks: {
+                            color: "rgba(246, 239, 228, 0.68)",
+                        },
+                    },
                     y: {
                         beginAtZero: true,
+                        grid: {
+                            color: "rgba(246, 239, 228, 0.08)",
+                        },
                         ticks: {
+                            color: "rgba(246, 239, 228, 0.68)",
                             stepSize: 1, // Set the step size to 1 to ensure only integers are shown
                             callback: function (value) {
                                 if (Number.isInteger(value)) {
@@ -876,6 +937,7 @@ function draw_bar_plot(canvas, data, labels, chart_reference, title = "") {
                     title: {
                         display: true, // Show the title
                         text: title, // Set the title text
+                        color: "rgba(246, 239, 228, 0.86)",
                     },
                 },
             },

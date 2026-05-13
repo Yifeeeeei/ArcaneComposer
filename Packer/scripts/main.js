@@ -1,6 +1,6 @@
 const imageRepoBase = "https://yifeeeeei.github.io/ArcaneImages";
-const width = numberToVw(177 * 0.15);
-const height = numberToVw(258 * 0.15);
+const width = numberToVw(177 * 0.11);
+const height = numberToVw(258 * 0.11);
 
 function numberToVw(num) {
     return num.toString() + "vh";
@@ -20,6 +20,8 @@ async function setup() {
     });
 }
 function openpack() {
+    container = document.getElementsByClassName("container")[0];
+    container.innerHTML = "";
     all_card_numbers = [];
     numberToPathMapping = {};
     for (var i = 0; i < all_card_infos.length; i++) {
@@ -53,7 +55,6 @@ function openpack() {
             width,
             height
         );
-        container = document.getElementsByClassName("container")[0];
         c.setParent(container);
     }
 }
