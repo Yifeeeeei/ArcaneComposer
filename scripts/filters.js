@@ -45,6 +45,7 @@ function split_filters() {
 
 function get_card_features(card_info) {
     let features = [];
+    features.push(card_info.number.toString());
     features.push(card_info.name);
     features.push(card_info.tag);
     features.push(card_info.description);
