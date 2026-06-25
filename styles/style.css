@@ -29,6 +29,7 @@ body {
     width: 100%;
     height: 100%;
     margin: 0;
+    overflow-x: clip;
 }
 
 html {
@@ -640,18 +641,31 @@ canvas {
 }
 
 @media (max-width: 720px) {
+    html {
+        height: 100dvh;
+        overflow: hidden;
+    }
+
     body.page-composer {
-        height: 100%;
+        height: 100dvh;
         overflow: hidden;
     }
 
     .app-header {
-        gap: 10px;
-        padding: 12px 12px 8px;
+        gap: 8px;
+        padding: max(10px, env(safe-area-inset-top)) 10px 7px;
+    }
+
+    .brand-lockup {
+        gap: 0;
+    }
+
+    .brand-lockup span {
+        font-size: 0.66rem;
     }
 
     .brand-lockup strong {
-        font-size: 1.45rem;
+        font-size: 1.28rem;
     }
 
     .app-nav {
@@ -659,36 +673,46 @@ canvas {
         flex-wrap: nowrap;
         overflow-x: auto;
         justify-content: flex-start;
+        gap: 6px;
         padding-bottom: 2px;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .app-nav::-webkit-scrollbar {
+        display: none;
     }
 
     .app-nav a {
         flex: 0 0 auto;
-        min-height: 34px;
-        padding: 0 10px;
+        min-height: 32px;
+        padding: 0 11px;
+        font-size: 0.88rem;
     }
 
     .mobile-tabs {
         position: fixed;
         right: 10px;
-        bottom: 10px;
+        bottom: max(10px, env(safe-area-inset-bottom));
         left: 10px;
         z-index: 12;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
+        gap: 6px;
         border: 1px solid var(--line);
-        padding: 8px;
+        padding: 7px;
         background: rgba(8, 7, 5, 0.94);
         box-shadow: 0 -18px 42px rgba(0, 0, 0, 0.42);
         backdrop-filter: blur(14px);
     }
 
     .mobile-tabs button {
-        min-height: 42px;
+        min-width: 0;
+        min-height: 40px;
         padding: 0 8px;
         color: var(--muted);
         background: rgba(246, 239, 228, 0.05);
+        font-size: 0.92rem;
     }
 
     .mobile-tabs button.active {
@@ -698,9 +722,9 @@ canvas {
     }
 
     .container {
-        height: calc(100dvh - 124px);
+        height: calc(100dvh - 107px);
         min-height: 0;
-        padding: 0 10px 76px;
+        padding: 0 10px calc(64px + env(safe-area-inset-bottom));
         overflow: hidden;
     }
 
@@ -708,6 +732,7 @@ canvas {
     .page-composer .right-side {
         min-height: 0;
         height: 100%;
+        overflow: hidden;
     }
 
     .page-composer[data-mobile-view="cards"] .right-side,
@@ -745,11 +770,19 @@ canvas {
 
     .page-composer .left-side .upper-part {
         gap: 10px;
-        padding: 12px;
+        padding: 10px;
     }
 
     .page-composer .panel-title {
         min-width: 0;
+    }
+
+    .page-composer .panel-title span {
+        font-size: 0.68rem;
+    }
+
+    .page-composer .panel-title strong {
+        font-size: 0.98rem;
     }
 
     .filter-bar,
@@ -761,39 +794,92 @@ canvas {
     #input_filter,
     #input_deck_code {
         flex-basis: 100%;
+        height: 40px;
+        font-size: 0.92rem;
+    }
+
+    #button_filter,
+    #button_build,
+    #button_export {
+        min-height: 38px;
+        padding: 0 16px;
     }
 
     #collections_list {
-        grid-template-columns: repeat(auto-fill, minmax(min(92vw, 190px), 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 10px;
     }
 
+    .lower-part {
+        padding: 10px;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+    }
+
     .card {
-        width: min(var(--card-width, 200px), 92vw) !important;
+        width: 100% !important;
+        height: auto !important;
         padding: 7px;
     }
 
+    .card_header {
+        min-height: 30px;
+        gap: 6px;
+    }
+
     .card_name {
-        font-size: 0.82rem;
+        font-size: 0.78rem;
+    }
+
+    .card_add_button {
+        width: 28px;
+        min-width: 28px;
+        height: 28px;
+        min-height: 28px;
     }
 
     .card_information_bar {
-        font-size: 0.7rem;
+        min-height: 21px;
+        overflow: hidden;
+        font-size: 0.66rem;
+        line-height: 1.2;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .card_img {
+        aspect-ratio: 177 / 258;
+        object-fit: cover;
     }
 
     .deck_header {
         position: sticky;
         top: 0;
         z-index: 1;
-        margin-top: 10px;
+        margin: 10px 0 7px;
+        padding: 8px 9px;
         background: rgba(31, 24, 17, 0.96);
+        font-size: 0.9rem;
+    }
+
+    .deck_card {
+        padding: 9px 8px;
+        font-size: 0.92rem;
+    }
+
+    .deck_minus_button {
+        width: 34px;
+        min-width: 34px;
+        height: 34px;
+        min-height: 34px;
     }
 
     #deck_info {
         right: 10px;
-        bottom: 76px;
+        bottom: calc(64px + env(safe-area-inset-bottom));
         left: 10px;
         height: 42vh;
+        overflow-x: auto;
     }
 
     #zoom_img,
