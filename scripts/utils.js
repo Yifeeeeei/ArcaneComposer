@@ -69,7 +69,7 @@ function sync_card_grid_layout() {
         return;
     }
     document.documentElement.style.setProperty("--card-width", card_width);
-    const isMobile = window.matchMedia("(max-width: 720px)").matches;
+    const isMobile = window.matchMedia("(max-width: 900px)").matches;
     if (isMobile) {
         collectionsList.style.gridTemplateColumns =
             "repeat(2, minmax(0, 1fr))";
