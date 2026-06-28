@@ -640,7 +640,7 @@ canvas {
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 900px), (max-aspect-ratio: 3/4) {
     html {
         height: 100dvh;
         overflow: hidden;
