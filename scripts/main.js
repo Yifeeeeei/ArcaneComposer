@@ -3,6 +3,7 @@
 // bind show_hint to hint text
 
 async function setup() {
+    setup_mobile_tabs();
     // read the files
     // all_card_infos = await readJsonFile("resources/all_card_infos.json");
     all_card_infos = await readJsonFile(
@@ -91,7 +92,6 @@ async function setup() {
 
     // set up initial filter if any
     set_up_initial_filter();
-    setup_mobile_tabs();
 }
 
 function set_up_initial_filter() {
@@ -114,7 +114,8 @@ function setup_mobile_tabs() {
     if (tabs.length === 0) {
         return;
     }
-    document.body.dataset.mobileView = "cards";
+    const initialView = document.body.dataset.mobileView || "cards";
+    document.body.dataset.mobileView = initialView;
     tabs.forEach(function (tab) {
         tab.addEventListener("click", function () {
             const view = tab.dataset.mobileView;
@@ -124,6 +125,7 @@ function setup_mobile_tabs() {
                 item.setAttribute("aria-pressed", item === tab ? "true" : "false");
             });
         });
+        tab.classList.toggle("active", tab.dataset.mobileView === initialView);
         tab.setAttribute(
             "aria-pressed",
             tab.classList.contains("active") ? "true" : "false"
