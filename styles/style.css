@@ -791,6 +791,10 @@ canvas {
         flex-wrap: wrap;
     }
 
+    .icon-tools {
+        display: none;
+    }
+
     #input_filter,
     #input_deck_code {
         flex-basis: 100%;
